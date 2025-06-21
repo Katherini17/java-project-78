@@ -1,5 +1,7 @@
 plugins {
     application
+    checkstyle
+    id("org.sonarqube") version "6.2.0.5505"
     id("com.github.ben-manes.versions") version "0.52.0"
 
 }
@@ -24,3 +26,10 @@ application {
     mainClass.set("hexlet.code.App")
 }
 
+sonar {
+    properties {
+        property("sonar.projectKey", "Katherini17_java-project-78")
+        property("sonar.organization", "katherini-17-projects")
+        property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
