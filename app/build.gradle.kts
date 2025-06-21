@@ -1,6 +1,7 @@
 plugins {
     application
     checkstyle
+    jacoco
     id("org.sonarqube") version "6.2.0.5505"
     id("com.github.ben-manes.versions") version "0.52.0"
 
@@ -31,5 +32,23 @@ sonar {
         property("sonar.projectKey", "Katherini17_java-project-78")
         property("sonar.organization", "katherini-17-projects")
         property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
+jacoco {
+    toolVersion = "0.8.13"
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = true
+        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }
