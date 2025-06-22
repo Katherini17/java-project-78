@@ -1,16 +1,23 @@
 package hexlet.code;
 
+import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidatorTest {
+    private static Validator validator;
+
+    @BeforeAll
+    public static void prepareValidator() {
+        validator = new Validator();
+    }
 
     @Test
     public void testStringValidator() {
-        Validator validator = new Validator();
         StringSchema schema = validator.string();
 
         String emptyText = "";
@@ -49,8 +56,35 @@ public class ValidatorTest {
 
     @Test
     public void testNumberValidator() {
-        Integer positiveNumber = 5;
-        Integer negativeNumber = -7;
-        Integer
+        int positiveNumber1 = 5;
+        int positiveNumber2 = 200;
+
+        int negativeNumber1 = -7;
+        int negativeNumber2 = -3;
+
+        int min = -4;
+        int max = 150;
+
+        NumberSchema schema = validator.number();
+
+        assertTrue(schema.isValid(positiveNumber1));
+        assertTrue(schema.isValid(negativeNumber1));
+        assertTrue(schema.isValid(null));
+
+        schema.positive();
+
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(positiveNumber1));
+        assertFalse(schema.isValid(negativeNumber1));
+
+        schema.range(min, max);
+
+        assertTrue(schema.isValid(null));
+        assertTrue(schema.isValid(positiveNumber1));
+        assertFalse(schema.isValid(negativeNumber2));
+
+        schema.required();
+
+        assertFalse(schema.isValid(null));
     }
 }
