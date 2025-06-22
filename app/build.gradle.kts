@@ -1,5 +1,5 @@
 plugins {
-    application
+    id("java")
     checkstyle
     jacoco
     id("org.sonarqube") version "6.2.0.5505"
@@ -29,10 +29,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-application {
-    mainClass.set("hexlet.code.App")
-}
-
 sonar {
     properties {
         property("sonar.projectKey", "Katherini17_java-project-78")
@@ -55,6 +51,5 @@ jacoco {
 tasks.jacocoTestReport {
     reports {
         xml.required = true
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
     }
 }

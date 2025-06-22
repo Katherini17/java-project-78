@@ -5,7 +5,7 @@ import hexlet.code.schemas.StringSchema;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class AppTest {
+public class ValidatorTest {
     public void testStringValidator() {
         Validator validator = new Validator();
         StringSchema schema = validator.string();
