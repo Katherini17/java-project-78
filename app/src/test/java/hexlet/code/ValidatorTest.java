@@ -26,7 +26,7 @@ public class ValidatorTest {
 
         schema.required();
 
-        assertFalse(schema.isValid(exampleText2));
+        assertFalse(schema.isValid(emptyText));
         assertFalse(schema.isValid(null));
         assertTrue(schema.isValid(exampleText1));
 

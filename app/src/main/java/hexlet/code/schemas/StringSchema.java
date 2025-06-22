@@ -42,6 +42,11 @@ public class StringSchema {
             return !isRequired;
         }
 
-        return text.length() >= minStringLength && text.toLowerCase().contains(subString);
+        if (text.isEmpty() && isRequired) {
+            return false;
+        }
+
+        return text.length() >= minStringLength
+                && text.toLowerCase().contains(subString);
     }
 }
