@@ -46,4 +46,11 @@ public class ValidatorTest {
         assertFalse(schema.isValid(exampleText1));
         assertTrue(schema.isValid(exampleText3));
     }
+
+    @Test
+    public void testNumberValidator() {
+        Integer positiveNumber = 5;
+        Integer negativeNumber = -7;
+        Integer
+    }
 }
