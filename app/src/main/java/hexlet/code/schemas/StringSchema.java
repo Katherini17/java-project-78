@@ -1,52 +1,34 @@
 package hexlet.code.schemas;
 
-import lombok.Setter;
+import java.util.function.Predicate;
 
-@Setter
-public class StringSchema {
-    private boolean isRequired;
-    private int minStringLength;
-    private String subString;
-
-    public StringSchema() {
-        this.isRequired = false;
-        this.minStringLength = 0;
-        this.subString = "";
-    }
+public class StringSchema extends BaseSchema<String> {
 
     public StringSchema required() {
-        setRequired(true);
+        Predicate<String> testRequired = value -> {
+            return value != null && !value.isEmpty();
+        };
+        addCondition("required", testRequired);
+
         return this;
     }
 
-    public StringSchema minLength(int length) {
-        setMinStringLength(length);
-        if (length != 0) {
-            setRequired(true);
-        }
+    public StringSchema minLength(int minLength) {
+        Predicate<String> testMinLength = text -> {
+            return text != null && text.length() >= minLength;
+        };
+        addCondition("minLength", testMinLength);
+
         return this;
     }
 
-    public StringSchema contains(String text) {
-        if (text != null && !text.isEmpty()) {
-            setRequired(true);
-            setSubString(text.toLowerCase());
-        }
+    public StringSchema contains(String substring) {
+        Predicate<String> testContains = text -> {
+            return text != null && text.contains(substring);
+        };
 
-        setSubString(text);
+        addCondition("contains", testContains);
+
         return this;
-    }
-
-    public boolean isValid(String text) {
-        if (text == null) {
-            return !isRequired;
-        }
-
-        if (text.isEmpty() && isRequired) {
-            return false;
-        }
-
-        return text.length() >= minStringLength
-                && text.toLowerCase().contains(subString);
     }
 }
