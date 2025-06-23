@@ -1,23 +1,31 @@
 package hexlet.code.schemas;
 
-import java.util.HashSet;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
 public class BaseSchema<T> {
-    private Set<Predicate<T>> conditions = new HashSet<>();
+    private final Map<String, Predicate<T>> conditions;
+
+    public BaseSchema() {
+        conditions = new HashMap<>();
+    }
 
     public boolean isValid(T obj) {
-        for (Predicate<T> condition : conditions) {
-            if (!condition.test(obj)) {
+        Collection<Predicate<T>> predicates = conditions.values();
+
+        for (Predicate<T> predicate : predicates) {
+            if (!predicate.test(obj)) {
                 return false;
             }
         }
+
         return true;
     }
 
-    public void addCondition(Predicate<T> condition) {
-        conditions.add(condition);
+    public void addCondition(String name, Predicate<T> condition) {
+        conditions.put(name, condition);
     }
 }
