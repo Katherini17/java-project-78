@@ -28,4 +28,5 @@ public class BaseSchema<T> {
     public void addCondition(String name, Predicate<T> condition) {
         conditions.put(name, condition);
     }
+
 }

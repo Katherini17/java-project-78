@@ -21,9 +21,9 @@ public class ValidatorTest {
         StringSchema schema = validator.string();
 
         String emptyText = "";
-        String exampleText1 = "Example text";
-        String exampleText2 = "Text";
-        String exampleText3 = "The longest example";
+        String exampleText1 = "example text";
+        String exampleText2 = "text";
+        String exampleText3 = "the longest text";
         String subString1 = "example";
         String subString2 = "longest";
 
@@ -81,6 +81,7 @@ public class ValidatorTest {
 
         assertTrue(schema.isValid(null));
         assertTrue(schema.isValid(positiveNumber1));
+        assertFalse(schema.isValid(positiveNumber2));
         assertFalse(schema.isValid(negativeNumber2));
 
         schema.required();
