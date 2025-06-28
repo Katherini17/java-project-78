@@ -5,6 +5,9 @@ import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -87,5 +90,30 @@ public class ValidatorTest {
         schema.required();
 
         assertFalse(schema.isValid(null));
+    }
+
+    @Test
+    public void testMapValidator() {
+        mapSchema schema = validator.map();
+
+        assertTrue(schema.isValid(null));
+
+        schrma.required();
+
+        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(new HashMap<>()));
+
+        Map<Object, Object> data = new HashMap<>();
+        data.put("key1", new HashMap<>());
+
+        assertTrue(schema.isValid(data));
+
+        schema.sezeOf(2);
+
+        assertFalse(schema.isValid(data));
+
+        data.put("key2", 5 );
+
+        assertTrue(schema.isValid(data));
     }
 }
