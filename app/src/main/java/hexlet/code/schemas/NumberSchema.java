@@ -1,10 +1,7 @@
 package hexlet.code.schemas;
 
-import lombok.Setter;
-
 import java.util.function.Predicate;
 
-@Setter
 public class NumberSchema extends BaseSchema<Integer> {
 
     public NumberSchema required() {

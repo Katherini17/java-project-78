@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
 import org.junit.jupiter.api.BeforeAll;
@@ -94,11 +95,11 @@ public class ValidatorTest {
 
     @Test
     public void testMapValidator() {
-        mapSchema schema = validator.map();
+        MapSchema schema = validator.map();
 
         assertTrue(schema.isValid(null));
 
-        schrma.required();
+        schema.required();
 
         assertFalse(schema.isValid(null));
         assertTrue(schema.isValid(new HashMap<>()));
@@ -108,11 +109,11 @@ public class ValidatorTest {
 
         assertTrue(schema.isValid(data));
 
-        schema.sezeOf(2);
+        schema.sizeOf(2);
 
         assertFalse(schema.isValid(data));
 
-        data.put("key2", 5 );
+        data.put("key2", 5);
 
         assertTrue(schema.isValid(data));
     }
