@@ -3,7 +3,6 @@ package hexlet.code.schemas;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Predicate;
 
 public class BaseSchema<T> {
