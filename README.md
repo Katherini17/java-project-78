@@ -2,7 +2,7 @@
 
 Validator - `Validator` is a Java library for data validation.
 It provides a simple and flexible way to define validation schemas and check data against those schemas.
-The library supports various data types, including strings, numbers, and Map<K, V>, and allows you to define complex validation rules.
+The library supports various data types, including String, Integer, and Map<K, V>, and allows you to define complex validation rules.
 
 ## Technologies
 
