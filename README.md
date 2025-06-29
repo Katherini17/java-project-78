@@ -118,7 +118,7 @@ schema.isValid(null); // false
 // sizeof() — adds a limit to the size of the map. 
 // The number of key-value pairs in the Map object must be equal to the specified value
 
-schema.sizeOf(3);
+schema.sizeof(3);
 
 schema.isValid(false); // false
 

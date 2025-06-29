@@ -110,7 +110,7 @@ public class ValidatorTest {
 
         assertTrue(schema.isValid(data));
 
-        schema.sizeOf(2);
+        schema.sizeof(2);
 
         assertFalse(schema.isValid(data));
 

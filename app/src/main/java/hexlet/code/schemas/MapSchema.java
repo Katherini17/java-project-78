@@ -12,7 +12,7 @@ public class MapSchema<K, V> extends BaseSchema<Map<K, V>> {
         return this;
     }
 
-    public MapSchema sizeOf(int size) {
+    public MapSchema sizeof(int size) {
         Predicate<Map<K, V>> testSizeOf = value -> value.size() == size;
         addCondition("sizeOf", testSizeOf);
 

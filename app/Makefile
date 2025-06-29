@@ -1,6 +1,9 @@
 clean:
 	@./gradlew clean
 
+build:
+	@./gradlew build
+
 test:
 	@./gradlew test
 
@@ -9,3 +12,5 @@ lint-main:
 
 lint-test:
 	@./gradlew checkstyleTest
+
+.PHONY: build
