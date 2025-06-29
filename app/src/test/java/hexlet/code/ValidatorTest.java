@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.schemas.BaseSchema;
 import hexlet.code.schemas.MapSchema;
 import hexlet.code.schemas.NumberSchema;
 import hexlet.code.schemas.StringSchema;
@@ -94,8 +95,8 @@ public class ValidatorTest {
     }
 
     @Test
-    public void testMapValidator() {
-        MapSchema schema = validator.map();
+    public void testSimpleMapValidator() {
+        MapSchema<String, Object> schema = validator.map();
 
         assertTrue(schema.isValid(null));
 
@@ -104,8 +105,8 @@ public class ValidatorTest {
         assertFalse(schema.isValid(null));
         assertTrue(schema.isValid(new HashMap<>()));
 
-        Map<Object, Object> data = new HashMap<>();
-        data.put("key1", new HashMap<>());
+        Map<String, Object> data = new HashMap<>();
+        data.put("key1", null);
 
         assertTrue(schema.isValid(data));
 
@@ -117,4 +118,30 @@ public class ValidatorTest {
 
         assertTrue(schema.isValid(data));
     }
+
+    @Test
+    public void testShape() {
+        String key1 = "key1";
+        String key2 = "key2";
+
+        MapSchema<String, String> schema = validator.map();
+        Map<String, BaseSchema<String>> schemas = new HashMap<>();
+
+        schemas.put(key1, validator.string().required());
+        schemas.put(key2, validator.string().required().minLength(5));
+
+        Map<String, String> data = new HashMap<>(Map.of(
+                key1, "value1",
+                key2, "value2"
+        ));
+        schema.shape((schemas));
+        assertTrue(schema.isValid(data));
+
+        data.put(key2, null);
+
+        assertFalse(schema.isValid(data));
+    }
 }
+
+
+
